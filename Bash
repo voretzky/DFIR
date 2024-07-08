@@ -1,6 +1,5 @@
-# Useful Bash Commands
+===Useful Bash Commands===
 
-### Find
-
-Find all the SUID/SGID executables
+>Find
+###Find all the SUID/SGID executables
 find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
