@@ -1,5 +1,9 @@
 ===Useful Bash Commands===
 
->Find
+>find
 ###Find all the SUID/SGID executables
 find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
+
+>cat
+###View the contents of all the hidden history files in the user's home directory
+cat ~/.*history | less
