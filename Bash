@@ -4,6 +4,9 @@
 ###Find all the SUID/SGID executables
 find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 
+###Find files with SUID permission
+find / -user root -perm -4000 -exec ls -ldb {} \;
+
 >cat
 ###View the contents of all the hidden history files in the user's home directory
 cat ~/.*history | less
