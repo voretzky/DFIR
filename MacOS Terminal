@@ -1,0 +1,10 @@
+
+
+>>>CREATE CONTAINER [SPARSE IMAGE]
+hdiutil create -size 1000g -volname "<NAME>" -fs APFS -layout GPTSPUD -type SPARSE -attach "/Volumes/<DRIVE_NAME>/<CONTAINER_NAME>" 
+hdiutil create -size 1000g -volname "<NAME>" -fs APFS -layout GPTSPUD -type SPARSE -attach "BLANK/ABCDE"       
+hdiutil create -size 1000g -volname "<NAME>" -fs APFS -layout GPTSPUD -type SPARSE -attach "/BLANK/ABCDE"   
+
+
+
+
