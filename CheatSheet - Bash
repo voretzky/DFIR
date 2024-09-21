@@ -1,14 +1,97 @@
 ===Useful Bash Commands===
 
 >find
-###Find all the SUID/SGID executables
-find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
 
-###Find files with SUID permission
-find / -user root -perm -4000 -exec ls -ldb {} \;
-find / -perm -u=s -type f 2>/dev/null
+      ###Find all the SUID/SGID executables
+      find / -type f -a \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \; 2> /dev/null
+    
+      ###Find files with SUID permission
+      find / -user root -perm -4000 -exec ls -ldb {} \;
+      find / -perm -u=s -type f 2>/dev/null
 
 
 >cat
-###View the contents of all the hidden history files in the user's home directory
-cat ~/.*history | less
+      ###View the contents of all the hidden history files in the user's home directory
+      cat ~/.*history | less
+
+>Linux OS details
+
+      hostname
+                #returns computer hostname
+                #Program options:
+                #    -a, --alias            alias names
+                #    -A, --all-fqdns        all long host names (FQDNs)
+                #    -b, --boot             set default hostname if none available
+                #    -d, --domain           DNS domain name
+                #    -f, --fqdn, --long     long host name (FQDN)
+                #    -F, --file             read host name or NIS domain name from given file
+                #    -i, --ip-address       addresses for the host name
+                #    -I, --all-ip-addresses all addresses for the host
+                #    -s, --short            short host name
+                #    -y, --yp, --nis        NIS/YP domain name
+
+      uname -a
+                #  -a = all information about the system:
+                #  -s, --kernel-name        print the kernel namekernel name
+                #  -n, --nodename           print the network node hostname
+                #  -r, --kernel-release     print the kernel release
+                #  -v, --kernel-version     print the kernel version
+                #  -m, --machine            print the machine hardware name
+                #  -p, --processor          print the processor type or "unknown"
+                #  -i, --hardware-platform  print the hardware platform or "unknown"
+                #  -o, --operating-system   print the operating system
+
+      id
+                #user’s privilege level and group memberships.
+
+      env
+                #show environmental variables.
+
+      cat /proc/version
+                #The proc filesystem (procfs) provides information about the target system processes. 
+                #Provides information on the kernel version and additional data such as whether a compiler (e.g. GCC) is installed.
+    
+      cat /etc/issue
+                #some information about the operating system but can easily be customized or changed. While on the subject, 
+                #any file containing system information can be customized or changed. For a clearer understanding of the system, 
+                #it is always good to look at all of these.
+
+      cat /etc/passwd
+                #discover users on the system
+
+
+      ps 
+                #report a snapshot of the current processes.
+                #ps displays information about a selection of the active processes. 
+                          
+                          # -A, -e               all processes
+                          # -a                   all with tty, except session leaders
+                          #  a                   all with tty, including other users
+                          # -d                   all except session leaders
+                          # -N, --deselect       negate selection
+                          #  r                   only running processes
+                          #  T                   all processes on this terminal
+                          #  x                   processes without controlling ttys
+                        #Selection by list:
+                          # -C <command>         command name
+                          #-G, --Group <gid>     real group id or name
+                          #-g, --group <group>   session or effective group name
+                          #-p, --pid <pid>       process id
+                          #   --ppid <pid>       select by parent process id
+                          #-s, --sid <session>   session id
+                          #-t, t, --tty <tty>    terminal
+                          #-u, U, --user <uid>   effective user id or name
+                          #-U, --User <uid>      real user id or name
+                        #Output formats:
+                          # -F                   extra full
+                          #-f                    full-format, including command lines
+                          #f, --forest           ascii art process tree
+                          #-H                    show process hierarchy
+                          #-j                    jobs format
+                          # u                    user-sorted
+                          # v                    virtual memory format
+                   
+        sudo -l
+                  #list all commands your user can run using sudo
+
+
