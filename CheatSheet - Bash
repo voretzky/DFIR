@@ -46,24 +46,32 @@
 
       env
                 #show environmental variables.
-
+      
+      history
+                  #bash history
+                        
       cat /proc/version
-                #The proc filesystem (procfs) provides information about the target system processes. 
-                #Provides information on the kernel version and additional data such as whether a compiler (e.g. GCC) is installed.
+                  #The proc filesystem (procfs) provides information about the target system processes. 
+                  #Provides information on the kernel version and additional data such as whether a compiler (e.g. GCC) is installed.
     
       cat /etc/issue
-                #some information about the operating system but can easily be customized or changed. While on the subject, 
-                #any file containing system information can be customized or changed. For a clearer understanding of the system, 
-                #it is always good to look at all of these.
+                  #some information about the operating system but can easily be customized or changed. While on the subject, 
+                  #any file containing system information can be customized or changed. For a clearer understanding of the system, 
+                  #it is always good to look at all of these.
 
       cat /etc/passwd
-                #discover users on the system
-
+                  #discover users on the system
+      
+            cat /etc/passwd | cut -d ":" -f 1      
+                  #remove all the fields but username  
+            cat /etc/passwd | grep home
+                  #Remember that this will return all users, some of which are system or service users that would not be very useful. 
+                  #Another approach could be to grep for “home” as real users will most likely have their folders under the “home” directory.
 
       ps 
-                #report a snapshot of the current processes.
-                #ps displays information about a selection of the active processes. 
-                          
+                  #report a snapshot of the current processes.
+                  #ps displays information about a selection of the active processes. 
+                       #Options:   
                           # -A, -e               all processes
                           # -a                   all with tty, except session leaders
                           #  a                   all with tty, including other users
@@ -85,13 +93,30 @@
                         #Output formats:
                           # -F                   extra full
                           #-f                    full-format, including command lines
-                          #f, --forest           ascii art process tree
+                          # f, --forest          ascii art process tree
                           #-H                    show process hierarchy
                           #-j                    jobs format
                           # u                    user-sorted
                           # v                    virtual memory format
                    
-        sudo -l
+      sudo -l
                   #list all commands your user can run using sudo
 
+      ifconfig
+                  #information about the network interfaces of the system.
 
+      ip route
+                  #display routing table 
+      
+      netstat 
+                  #information about existing connections and ports used
+                        -a                  all listening/established ports
+                        -au                 listening/established UDP ports
+                        -at                 listening/established TCP ports
+                        -l                  list ports in “listening” mode. These ports are open and ready to accept incoming connections.
+                        -lu                 listening using the UDP protocol
+                        -lt                 listening using the TCP protocol
+                        -s                  list network usage statistics by protocol (below) This can also be used with the -t or -u options t.
+                        -p                  PID and name
+                        -i                  interface statistics
+                        -ano                all, do not resolve names, timer information
