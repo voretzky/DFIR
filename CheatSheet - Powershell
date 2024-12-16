@@ -14,3 +14,9 @@
 	Get-Process | Get-Member						lists all properties available for a command
 	Get-Process | Select-Object -Property *					lists all properties of all processes
 	Get-Process | Select-Object -Property Name,Id,Path			lists selected properties (Name, ID, Path) of all processes
+	
+	Get-Process | Select-Object -Property Path, Name, Id | Where-Object -Property Name -eq explorer
+										lists selected properties (Name, ID, Path) of the processes which name is "explorer"
+
+	Get-Process | Select-Object -Property Path, Name, Id | Where-Object -Property Path -Like "*temp*"
+										lists selected properties (Name, ID, Path) of the processes which path contains "temp"
