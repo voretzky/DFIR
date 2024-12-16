@@ -5,6 +5,7 @@
 	Get-Verb								get a list of ps commands
 	Get-Help
 	Get-Help out-file							help on specific topic
+	Stop-Process								kill the process
 
 >Output Formatting
 	Format-Table								
@@ -12,7 +13,7 @@
 	Out-File								output to the file
 	Convert-ToCsv | Out-File -File Path [C:\..]
 
->Examining Processes
+>Processes Analysis
 	Get-Process		                    				get info about running processes
     	Get-Process 'power*'           						get info about named process with wildcard
 	Get-Process -Name powershell						get info about named process
@@ -36,3 +37,25 @@
 										lists full selected details of all processes with the class tyme win32 process
 	Get-CimInstance -Class Win32_Process | Where-Object -Property ParentProcessId -eq 123			
 										lists full details of the process with Parent PID 123
+
+
+>Network Analysis
+	Get-NetTCPConnection		                    			get a list of network connections for this host
+	Get-NetTCPConnection | Select-Object -Property LocalAddress, LocalPort, State, OwningProcess
+										get a list of network connections with a selection of properties displayed:
+											LocalAddress: 	The IP address that will accept connections for this listener or is used for the outbound connection [ 0.0.0.0 - IPv4, :: - IPv6 - all interfaces]
+											LocalPort: 	The local port number used for the connection; if the state is Listen, then this is the listening TCP port number
+											State: 		The state of the network connection
+											OwningProcess: 	The process ID of the process that made the connection or is listening for connections
+
+>IR Example
+	Get-NetTCPConnection 								>	Get the list of running connections, notice a suspicious port open and related PID
+	Get-Process -Id [PID]								>	Obtain details of the related process based on PID lookup
+	Get-Process -Name [name] | Select-Object -Property Name,Id,Path			>	Obtain the location of the process
+	Get-CimInstance -Class Win32_Process | Where-Object -Property Name -eq [Name]	
+	or
+	Get-CimInstance -Class Win32_Process | Where-Object -Property Id -eq [PID]	>	Get more details on the process [NOTE: name might be slighly differnt from the previous step - PS inconsistent with the naming]
+	Get-CimInstance -Class Win32_Process | Where-Object -Property Id -eq [PID] | Select-Object -property Name, Path, ProcessParentId, CommandLine
+											>	Obtain command line arguments for the process. 
+	Get-Process | Select-Object -Property Path, Name, Id | Where-Object -Property Id -eq [PID] | Stop-Process
+											>	kill suspicious process
