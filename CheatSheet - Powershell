@@ -8,7 +8,8 @@
 	Stop-Process								kill the process
 
 >Output Formatting
-	Format-Table								
+	Format-Table
+	Format-List
 	Out-GridView								uses GUI to display output, includes filters
 	Out-File								output to the file
 	Convert-ToCsv | Out-File -File Path [C:\..]
@@ -30,7 +31,7 @@
 	Get-Process | Select-Object -Property Path, Name, Id | Where-Object -Property Path -Like "*temp*"
 										lists selected properties (Name, ID, Path) of the processes which path contains "temp"
 
-	Get-CimInstance -Class Win32_Process					lists processes with the class tyme win32 process
+	Get-CimInstance -Class [or ClassName] Win32_Process			lists processes with the class tyme win32 process
 	Get-CimInstance -Class Win32_Process | Select-Object -Property *	lists full details of all processes with the class tyme win32 process
 
 	Get-CimInstance -Class Win32_Process | Select-Object -Property Name, Path, ProcessId, ParentProcessId	
@@ -38,6 +39,15 @@
 	Get-CimInstance -Class Win32_Process | Where-Object -Property ParentProcessId -eq 123			
 										lists full details of the process with Parent PID 123
 
+>Services Analysis
+	Get-Service								list all services configured
+	Get-Service | Select-Object -Property *					lists all properties of all services
+	Get-CimInstance -ClassName Win32_Service | Select-Object *		lists all properties of all services
+	Get-CimInstance -ClassName Win32_Service | Format-List Name, Description, PathName
+										list all services with selected properties as a list
+	Get-CimInstance -ClassName Win32_Service | Select-Object -Property Name, State, Description, PathName
+										list all services with selected properties as a table
+	
 
 >Network Analysis
 	Get-NetTCPConnection		                    			get a list of network connections for this host
