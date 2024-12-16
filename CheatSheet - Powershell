@@ -3,6 +3,14 @@
 >General Commands
 	Clear	or CTRL+L							clear screen
 	Get-Verb								get a list of ps commands
+	Get-Help
+	Get-Help out-file							help on specific topic
+
+>Output Formatting
+	Format-Table								
+	Out-GridView								uses GUI to display output, includes filters
+	Out-File								output to the file
+	Convert-ToCsv | Out-File -File Path [C:\..]
 
 >Examining Processes
 	Get-Process		                    				get info about running processes
@@ -23,4 +31,8 @@
 
 	Get-CimInstance -Class Win32_Process					lists processes with the class tyme win32 process
 	Get-CimInstance -Class Win32_Process | Select-Object -Property *	lists full details of all processes with the class tyme win32 process
-	Get-CimInstance -Class Win32_Process | Select-Object -Property Name, Path, ProcessId, ParentProcessId	lists full selected details of all processes with the class tyme win32 process
+
+	Get-CimInstance -Class Win32_Process | Select-Object -Property Name, Path, ProcessId, ParentProcessId	
+										lists full selected details of all processes with the class tyme win32 process
+	Get-CimInstance -Class Win32_Process | Where-Object -Property ParentProcessId -eq 123			
+										lists full details of the process with Parent PID 123
