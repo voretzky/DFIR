@@ -15,7 +15,7 @@
 	Convert-ToCsv | Out-File -File Path [C:\..]
 
 >Processes Analysis
-	Get-Process		                    				get info about running processes
+	Get-Process		                    				get info about running processes, 							alternative: wmic.exe process
     	Get-Process 'power*'           						get info about named process with wildcard
 	Get-Process -Name powershell						get info about named process
 	Get-Process -Id 1234							get info about process with PID 1234
@@ -40,7 +40,7 @@
 										lists full details of the process with Parent PID 123
 
 >Services Analysis
-	Get-Service								list all services configured
+	Get-Service								list all services configured								alternative: sc.exe query
 	Get-Service | Select-Object -Property *					lists all properties of all services
 	Get-CimInstance -ClassName Win32_Service | Select-Object *		lists all properties of all services
 	Get-CimInstance -ClassName Win32_Service | Format-List Name, Description, PathName
@@ -50,7 +50,7 @@
 	
 
 >Network Analysis
-	Get-NetTCPConnection		                    			get a list of network connections for this host
+	Get-NetTCPConnection		                    			get a list of network connections for this host						alternative: netstat.exe -nao
 	Get-NetTCPConnection | Select-Object -Property LocalAddress, LocalPort, State, OwningProcess
 										get a list of network connections with a selection of properties displayed:
 											LocalAddress: 	The IP address that will accept connections for this listener or is used for the outbound connection [ 0.0.0.0 - IPv4, :: - IPv6 - all interfaces]
@@ -58,6 +58,33 @@
 											State: 		The state of the network connection
 											OwningProcess: 	The process ID of the process that made the connection or is listening for connections
 
+>Registry Analysis						
+	Get-ChildItem																			alternative: reg.exe
+
+
+
+>Scheduled Tasks
+	Get-ScheduledTask [TaskName] | Select-Object -Property TaskName													alternative: schtasks.exe		
+	Export-ScheduledTask -TaskName [Name]
+	Get-ScheduledTaskInfo -TaskName [Name] | Select-Object LastRunTime
+
+>User Accounts
+	Get-LocalUser								all local users										alternative: net.exe user
+	Get-LocalGroup								all local groups									alternative: net.exe localgroup
+	Get-LocalGroupMember [GroupName]					members of local group [GroupName]
+
+	net.exe user								list all users
+	net user /add [UserName] [Password]					create a username with [Username] and [Password]
+	net local group administrators /add [Username]				add user [Username] to local administrators group
+
+>Windows Log																				alternative: wevtutil.exe
+	Get-WinEvent Filter-Hashtable @{LogName='Security';StartTime=01/12/2024;EndTime=02/12/2024;}			[Note]Define variable $start = Get-Date 01/12/2024 and replace the code: StartTime=$start, this is the FASTER method, {} specifies hashtable
+															$start=Get-Date 01/12/2024;
+															$end=Get-Date 02/12/2024;
+															Get-WinEvent Filter-Hashtable @{LogName='Security';StartTime=$start;EndTime=$end;}
+
+	Get-WinEvent -LogName system 
+	Get-WinEvent -LogName system | Where-Object -Property id -eq 1234 | Format-List -Property TimeCreated,Message		[Note] this is the older - slower method. The whole log is imported
 >IR Example
 	Get-NetTCPConnection 								>	Get the list of running connections, notice a suspicious port open and related PID
 	Get-Process -Id [PID]								>	Obtain details of the related process based on PID lookup
@@ -69,3 +96,12 @@
 											>	Obtain command line arguments for the process. 
 	Get-Process | Select-Object -Property Path, Name, Id | Where-Object -Property Id -eq [PID] | Stop-Process
 											>	kill suspicious process
+
+>Differential Analysis - compare the current system against the baseline system												alternative: fc.exe
+	Get-Service > baseline_services_2024-12-01.txt					get the list of services on the healty system, and save to a txt
+	Get-Service > investigated-system_services_2024-12-01.txt			get the list of services on investigated system, and save to a txt
+	$baseline=Get-Content .\baseline_services_2024-12-01.txt			set variable $baseline for baseline_services_2024-12-01.txt
+	$current=Get-Content .\investigated-system_services_2024-12-01.txt		set variable $current for investigated-system_services_2024-12-01.txt
+	Compare-Object -ReferenceObject $baseline -DifferenceObject $current		compare
+
+	
