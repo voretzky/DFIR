@@ -139,4 +139,7 @@
 >Network log analysis
         awk '/dodgy_domain/ {print $1, $3, $7}' proxy.log                                                find entries containing [dodgy_domain] and print out fields 1,3,7
         TZ=America/Los_Angeles awk '/dodgy_domain/ {print strftime("%T", $1), $3, $7}' proxy.log         convert epoch to human readable time, strftime function can only display timestamps according to either UTC, or the local system timezone. strftime("%T", $1) - print the timestamp in HH:MM:SS format.
-        
+        awk '/dodgy_domain/ {print $3}' proxy.log | sort -u                                              find entries containing [dodgy_domain] and print out field 3, sort the list of IP addresses, returning unique values
+        tcpdump -nr dump_file.pcap dst host 167.123.255.123 | cut -d ' ' -f 3 | cut -d '.' -f 1-4 | sort -u
+        for octet in 2 3 103 105 107 108 109; do TZ=PST8PDT tcpdump -tttt -n -r dump_file.pcap -c 1 "src host 172.11.42.$octet and dst host 167.123.255.123" 2>/dev/null; done
+        for octet in 2 3 103 105 107 108 109; do TZ=PST8PDT tcpdump -tttt -n -r dump_file.pcap -c 1 "src host 172.11.42.$octet and dst host 167.123.255.123 and dst port 80" 2>/dev/null; done
