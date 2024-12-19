@@ -6,6 +6,7 @@
 	Get-Help
 	Get-Help out-file							help on specific topic
 	Stop-Process								kill the process
+	Remove-Item [Path\Name]							remove folder\file [Path\Name]
 
 >Output Formatting
 	Format-Table
@@ -47,7 +48,8 @@
 										list all services with selected properties as a list
 	Get-CimInstance -ClassName Win32_Service | Select-Object -Property Name, State, Description, PathName
 										list all services with selected properties as a table
-	
+	sc.exe delete [Name]							remove service [Name]
+
 
 >Network Analysis
 	Get-NetTCPConnection		                    			get a list of network connections for this host						alternative: netstat.exe -nao
@@ -60,13 +62,20 @@
 
 >Registry Analysis						
 	Get-ChildItem																			alternative: reg.exe
-
-
+	Get-ChildItem HKCU:
+	Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\Run"					list run key	
+	Get-ItemProperty "HKLM:\Software\Microsoft\Windows\CurrentVersion\RunOnce"				list run once key
+	Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\RunOnce"				list run once key
+	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run" -Name "Calcache"	remove item
+	Get-ItemProperty "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run\Calcache"				verify item removed
+	Remove-Item $env:temp\calcache.exe
+	Get-ChildItem $env:temp\calcache.exe
 
 >Scheduled Tasks
 	Get-ScheduledTask [TaskName] | Select-Object -Property TaskName													alternative: schtasks.exe		
 	Export-ScheduledTask -TaskName [Name]
 	Get-ScheduledTaskInfo -TaskName [Name] | Select-Object LastRunTime
+	Unregister-ScheduledTask -TaskName "[Name]"					Remove scheduled task
 
 >User Accounts
 	Get-LocalUser								all local users										alternative: net.exe user
