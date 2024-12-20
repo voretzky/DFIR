@@ -7,6 +7,8 @@
 	Get-Help out-file							help on specific topic
 	Stop-Process								kill the process
 	Remove-Item [Path\Name]							remove folder\file [Path\Name]
+	Get-FileHash [File]							hash a file
+	strings [File]								extract list of ASCII/Unicode strings from a file
 
 >Output Formatting
 	Format-Table
