@@ -9,6 +9,9 @@
 	Remove-Item [Path\Name]							remove folder\file [Path\Name]
 	Get-FileHash [File]							hash a file
 	strings [File]								extract list of ASCII/Unicode strings from a file
+	
+	$Password = Read-Host -AsSecureString [Password]			assign password to a variable
+	Set-LocalUser -Name [Username] -Password $Password			use the variable to set new user password
 
 >Output Formatting
 	Format-Table
@@ -115,4 +118,10 @@
 	$current=Get-Content .\investigated-system_services_2024-12-01.txt		set variable $current for investigated-system_services_2024-12-01.txt
 	Compare-Object -ReferenceObject $baseline -DifferenceObject $current		compare
 
-	
+
+>SMB Resources
+	Get-CimInstance -Class win32_share -ComputerName 10.10.1.255			enumarate SMB shares (Win systems only)						alternative (win and non-win systems): net.exe view \\10.10.1.255 /all
+	Get-SMBSession
+	Get-SMBSession | Select-Object *
+	Get-SMBSession | Select-Object ClientComputerName, Dialect, SecondsExists, SecondsIdle
+	Close-SMBSession -ClientComputerName 10.10.1.255 -Force
