@@ -1,0 +1,3 @@
+
+
+=IF(ISNA(VLOOKUP([search_object],[search_target],[target_colum],FALSE)),"No","Yes")
