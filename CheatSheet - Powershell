@@ -37,6 +37,9 @@
 	Get-Process | Select-Object -Property Path, Name, Id | Where-Object -Property Path -Like "*temp*"
 										lists selected properties (Name, ID, Path) of the processes which path contains "temp"
 
+	Get-Process | Where-Object { $_.Path -and $_.Path -notlike "*Program Files*" -and $_.Path -notlike "*Windows*" } | Select-Object ID, Name, StartTime, Path
+										lists processes whose path does not include Program Files or Windows	
+
 	Get-CimInstance -Class [or ClassName] Win32_Process			lists processes with the class tyme win32 process
 	Get-CimInstance -Class Win32_Process | Select-Object -Property *	lists full details of all processes with the class tyme win32 process
 
