@@ -1,0 +1,14 @@
+We can use SSH to transfer files using SCP (Secure Copy Protocol). 
+An example of the syntax is as follows: 
+
+scp mark@10.10.45.218:/home/mark/archive.tar.gz ~ 
+
+This command will copy a file named archive.tar.gz from the remote system located in the /home/mark directory to ~,
+i.e., the root of the home directory of the currently logged-in user.
+
+Another example syntax is:
+
+scp backup.tar.bz2 mark@10.10.45.218:/home/mark/ 
+
+This command will copy the file backup.tar.bz2 from the local system 
+to the directory /home/mark/ on the remote system.
