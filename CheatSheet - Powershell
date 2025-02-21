@@ -26,7 +26,7 @@
 	Get-Process -Name powershell						get info about named process
 	Get-Process -Id 1234							get info about process with PID 1234
     	Get-Process 'powershell' | Select-Object *    				get detailled (all objects) info about a named process
-	Get-Process  Computer-Name STUDENT            			get info about running processes on a remote system
+	Get-Process  Computer-Name STUDENT            				get info about running processes on a remote system
 	Get-Process | Get-Member						lists all properties available for a command
 	Get-Process | Select-Object -Property *					lists all properties of all processes
 	Get-Process | Select-Object -Property Name,Id,Path			lists selected properties (Name, ID, Path) of all processes
