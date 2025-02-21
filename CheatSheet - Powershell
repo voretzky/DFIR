@@ -90,9 +90,13 @@
 	Get-LocalGroup								all local groups									alternative: net.exe localgroup
 	Get-LocalGroupMember [GroupName]					members of local group [GroupName]
 
-	net.exe user								list all users
-	net user /add [UserName] [Password]					create a username with [Username] and [Password]
-	net local group administrators /add [Username]				add user [Username] to local administrators group
+	net accounts								check password policy 									!Note default pass policy - 8chars, capital, special
+	net user								list users
+	net user /add [UserName] [Password]					create a username with [Username] and [Password], 					!Note default pass policy - 8chars, capital, special
+	net localgroup								list local groups
+	net localgroup [GroupName]						list group members
+	net localgroup administrators /add [Username]				add user [Username] to local administrators group
+	net localgroup [GroupName] /add [Username]				add user [Username] to local [GroupName] group
 
 >Windows Log																				alternative: wevtutil.exe
 	Get-WinEvent Filter-Hashtable @{LogName='Security';StartTime=01/12/2024;EndTime=02/12/2024;}			[Note]Define variable $start = Get-Date 01/12/2024 and replace the code: StartTime=$start, this is the FASTER method, {} specifies hashtable
@@ -141,3 +145,8 @@
 	$Pass = Read-Host -AsSecureString   						set pass as secure string
 	Set-LocalUser -Name [user] -Password $Password					commit pass
 	Close-SmbSession -ClientComputerName 10.10.11.1 -Force				close existing session - prevent reconnecting
+
+>smbclient (Linux tool)
+	smbclient -U [UserName] //server/share -m SMB3					Linux smbclient - connect to SMB share from Llinux endpoint
+	smbclient - L //192.168.1.10 -U [UserName] -m SMB2                          	----outputs a list
+	smbclient ////192.168.1.10/[ShareName] -U [UserName] -m SMB1        		----interactive mode
