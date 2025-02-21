@@ -124,7 +124,16 @@
 
 >SMB Resources
 	Get-CimInstance -Class win32_share -ComputerName 10.10.1.255			enumarate SMB shares (Win systems only)						alternative (win and non-win systems): net.exe view \\10.10.1.255 /all
-	Get-SMBSession
+	Get-SMBShare																			alternative: net share
+	New-SmbMapping -LocalPath x: -RemotePath \\server\[share]			create a new mapping to a share							alternative: net use \\server\[share]
+	Get-SMBSession									view inbound connections							alternative: net session
+	Close-SmbSession								drop inbound connection								alternative: net session \\server /del
+	Get-SmbMapping									view outbound connections							alternative: net use
+	Remove-SmbMapping -Force							drop outbound connection							alternative: net use /del
 	Get-SMBSession | Select-Object *
 	Get-SMBSession | Select-Object ClientComputerName, Dialect, SecondsExists, SecondsIdle
 	Close-SMBSession -ClientComputerName 10.10.1.255 -Force
+	
+	$Pass = Read-Host -AsSecureString   						set pass as secure string
+	Set-LocalUser -Name [user] -Password $Password					commit pass
+	Close-SmbSession -ClientComputerName 10.10.11.1 -Force				close existing session - prevent reconnecting
