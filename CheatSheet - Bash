@@ -26,8 +26,10 @@
             find / -name gcc*                                                                              Find development tools and supported languages:
 
 >cat
-      ###View the contents of all the hidden history files in the user's home directory
-      cat ~/.*history | less
+            ###View the contents of all the hidden history files in the user's home directory
+            cat ~/.*history | less
+            cat file1.txt file2.txt file3.txt > combined_list.txt                                          Combine files into one
+            sort combined_list.txt | uniq -u > cleaned_combined_list.txt                                   sort and remove duplicates       
 
 >Linux OS details
 
