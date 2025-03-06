@@ -145,3 +145,9 @@
         tcpdump -nr dump_file.pcap dst host 167.123.255.123 | cut -d ' ' -f 3 | cut -d '.' -f 1-4 | sort -u
         for octet in 2 3 103 105 107 108 109; do TZ=PST8PDT tcpdump -tttt -n -r dump_file.pcap -c 1 "src host 172.11.42.$octet and dst host 167.123.255.123" 2>/dev/null; done
         for octet in 2 3 103 105 107 108 109; do TZ=PST8PDT tcpdump -tttt -n -r dump_file.pcap -c 1 "src host 172.11.42.$octet and dst host 167.123.255.123 and dst port 80" 2>/dev/null; done
+
+
+>CURL Requests
+            Fetch a web page as Edge Browser on WindowsA22
+            curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.2277.128" -L "https://example.com"
+
