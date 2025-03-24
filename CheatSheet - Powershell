@@ -58,7 +58,9 @@
 	Get-CimInstance -ClassName Win32_Service | Select-Object -Property Name, State, Description, PathName
 										list all services with selected properties as a table
 	sc.exe delete [Name]							remove service [Name]
-
+	Get-MpComputerStatus							Check Windows Defender status
+	Get-MpPreference							Check Windows Defender settings
+	
 
 >Network Analysis
 	Get-NetTCPConnection		                    			get a list of network connections for this host						alternative: netstat.exe -nao
