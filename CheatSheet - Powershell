@@ -60,7 +60,8 @@
 	sc.exe delete [Name]							remove service [Name]
 	Get-MpComputerStatus							Check Windows Defender status
 	Get-MpPreference							Check Windows Defender settings
-	
+	Get-NetFirewallProfile 							Check Firewall status
+	Get-NetFirewallProfile | Format-Table Name, Enabled			Check Firewall status
 
 >Network Analysis
 	Get-NetTCPConnection		                    			get a list of network connections for this host						alternative: netstat.exe -nao
