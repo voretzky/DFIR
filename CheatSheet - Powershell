@@ -61,7 +61,10 @@
 	Get-MpComputerStatus							Check Windows Defender status
 	Get-MpPreference							Check Windows Defender settings
 	Get-NetFirewallProfile 							Check Firewall status
-	Get-NetFirewallProfile | Format-Table Name, Enabled			Check Firewall status
+	Get-NetFirewallProfile | Format-Table Name, Enabled			Check Firewall status example
+	Set-NetFirewallProfile							Change firewall settings
+	Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False	Change firewall settings example
+
 
 >Network Analysis
 	Get-NetTCPConnection		                    			get a list of network connections for this host						alternative: netstat.exe -nao
