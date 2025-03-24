@@ -50,6 +50,7 @@
 
 >Services Analysis
 	Get-Service								list all services configured								alternative: sc.exe query
+	Get-Service windefend							check if Windows Defender running
 	Get-Service | Select-Object -Property *					lists all properties of all services
 	Get-CimInstance -ClassName Win32_Service | Select-Object *		lists all properties of all services
 	Get-CimInstance -ClassName Win32_Service | Format-List Name, Description, PathName
