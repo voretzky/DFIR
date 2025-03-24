@@ -75,6 +75,8 @@
 											LocalPort: 	The local port number used for the connection; if the state is Listen, then this is the listening TCP port number
 											State: 		The state of the network connection
 											OwningProcess: 	The process ID of the process that made the connection or is listening for connections
+	Test-NetConnection							test connectivity
+
 
 >Registry Analysis						
 	Get-ChildItem																			alternative: reg.exe
