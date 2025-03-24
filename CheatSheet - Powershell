@@ -62,6 +62,7 @@
 	Get-MpPreference							Check Windows Defender settings
 	Get-NetFirewallProfile 							Check Firewall status
 	Get-NetFirewallProfile | Format-Table Name, Enabled			Check Firewall status example
+	Get-NetFirewallRule | select DisplayName, Enabled, Description		Check firewall rules
 	Set-NetFirewallProfile							Change firewall settings
 	Set-NetFirewallProfile -Profile Domain, Public, Private -Enabled False	Change firewall settings example
 
