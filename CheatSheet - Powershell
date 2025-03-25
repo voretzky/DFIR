@@ -108,14 +108,18 @@
 	net localgroup administrators /add [Username]				add user [Username] to local administrators group
 	net localgroup [GroupName] /add [Username]				add user [Username] to local [GroupName] group
 
->Windows Log																				alternative: wevtutil.exe
+>Windows Log									https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-eventlog?view=powershell-5.1																			alternative: wevtutil.exe
 	Get-WinEvent Filter-Hashtable @{LogName='Security';StartTime=01/12/2024;EndTime=02/12/2024;}			[Note]Define variable $start = Get-Date 01/12/2024 and replace the code: StartTime=$start, this is the FASTER method, {} specifies hashtable
 															$start=Get-Date 01/12/2024;
 															$end=Get-Date 02/12/2024;
 															Get-WinEvent Filter-Hashtable @{LogName='Security';StartTime=$start;EndTime=$end;}
 
+	Get-EventLog -List							list available logs
 	Get-WinEvent -LogName system 
 	Get-WinEvent -LogName system | Where-Object -Property id -eq 1234 | Format-List -Property TimeCreated,Message		[Note] this is the older - slower method. The whole log is imported
+	
+
+
 >IR Example
 	Get-NetTCPConnection 								>	Get the list of running connections, notice a suspicious port open and related PID
 	Get-Process -Id [PID]								>	Obtain details of the related process based on PID lookup
