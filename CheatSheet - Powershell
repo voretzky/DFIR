@@ -49,6 +49,9 @@
 	Get-CimInstance -Class Win32_Process | Where-Object -Property ParentProcessId -eq 123			
 										lists full details of the process with Parent PID 123
 
+	wmic 									cmd line tool?
+	wmic product get name,version						list install applications
+
 >Services Analysis
 	Get-Service								list all services configured								alternative: sc.exe query
 	Get-Service windefend							check if Windows Defender running
