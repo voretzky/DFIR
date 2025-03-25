@@ -10,6 +10,7 @@
 	Get-FileHash [File]							hash a file
 	strings [File]								extract list of ASCII/Unicode strings from a file
 	
+	findstr /si '<ProcessCreate onmatch="exclude">' C:\tools\*		find string relating to SYSMON launch
 	$Password = Read-Host -AsSecureString [Password]			assign password to a variable
 	Set-LocalUser -Name [Username] -Password $Password			use the variable to set new user password
 
