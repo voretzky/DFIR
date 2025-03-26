@@ -1,4 +1,48 @@
 >System information
 
-  whoami
-  systeminfo
+    whoami                                      #current user
+    whoami /priv                                #current user privileges
+    whoami /groups                              #current user groups
+    
+    net user                                    #list system users
+    net group                                   #list system groups on Domain Controller
+    net localgroup                              #list system groups on local device
+    net localgroup administrators               #list users in the ADMINISTRATORS group
+
+    net accounts                                #local accounts settings
+    net accounts /domain                        #account settings if in DOMAIN
+    systeminfo                                  #detailed system information, including hardware  
+   
+    wmic qfe get Caption,Description            #list installed updates
+    wmic product get name,version,vendor        #list installed apps
+
+>Services
+
+    net start                                #installed and started services
+
+>Networking
+
+    ipconfig                                    #network settings and status
+    ipconfig /all                               #full network settings and status
+
+    netstat                                     #information about active connections
+                -a        #all listening ports
+                -b        #binary involved in the connection
+                -n        #no IP resolution
+                -o        #process ID
+    
+    arp -a                                      #current ARP entries
+
+
+>DNS
+
+    dig
+    dig -t AXFR DOMAIN_NAME @DNS_SERVER        #requesting zone transfer
+
+>SMB
+
+    net share                                   #list shared folders
+
+>SNMP
+
+    snmpcheck                                    #linux tool git clone https://gitlab.com/kalilinux/packages/snmpcheck.git
