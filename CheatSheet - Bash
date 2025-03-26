@@ -33,7 +33,17 @@
 
 >Linux OS details
 
-      hostname
+			ls /etc/*-release
+      cat /etc/os-release                    OS info stored in a file ending -release in /etc/ folder                          
+
+			who				
+								#who is logged on
+			w
+								#who is logged on and what are they doing
+
+			last 
+								#list last logged-in users; see who logged out and how much they stayed connected
+			hostname
                 #returns computer hostname
                 #Program options:
                 #    -a, --alias            alias names
@@ -59,7 +69,7 @@
                 #  -o, --operating-system   print the operating system
 
       id
-                #user’s privilege level and group memberships.
+                #user’s privilege level and group memberships, print the real and effective user and group IDS
 
       env
                 #show environmental variables.
@@ -84,7 +94,24 @@
             cat /etc/passwd | grep home
                   #Remember that this will return all users, some of which are system or service users that would not be very useful. 
                   #Another approach could be to grep for “home” as real users will most likely have their folders under the “home” directory.
+			 
+			cat /etc/group
+                  #discover groups on the system
 
+			cat /etc/shadow
+                  #discover password hashes - root access required
+
+			ls -lh /var/mail/
+									#listing users
+
+    	ls -lh /usr/bin/
+	    ls -lh /sbin/
+									#listing installed applications
+
+			rpm -qa
+									#listing installed packages on RPM distro -qa = query all
+			dpkg -l
+									#listing installed packages on Debian distro
       ps 
                   #report a snapshot of the current processes.
                   #ps displays information about a selection of the active processes. 
@@ -115,16 +142,22 @@
                           #-j                    jobs format
                           # u                    user-sorted
                           # v                    virtual memory format
-                   
+      ps axjf     
+									#display full process tree
+
       sudo -l
                   #list all commands your user can run using sudo
 
       ifconfig
                   #information about the network interfaces of the system.
+			ip a s
+									#ip address show - new version of ifconfig
 
       ip route
                   #display routing table 
-      
+
+      cat /etc/resolv.conf
+									#display DNS servers
       netstat 
                   #information about existing connections and ports used
                         -a                  all listening/established ports
@@ -137,6 +170,14 @@
                         -p                  PID and name
                         -i                  interface statistics
                         -ano                all, do not resolve names, timer information
+				lsof
+								#list of open files
+
+				lsof -i
+								#display only Internet and network connections
+
+				lsof -i :[PORT]
+								#display only Internet and network connections on chosen PORT
 
 >Network log analysis
         awk '/dodgy_domain/ {print $1, $3, $7}' proxy.log                                                find entries containing [dodgy_domain] and print out fields 1,3,7
