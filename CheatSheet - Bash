@@ -33,7 +33,7 @@
 
 >Linux OS details
 
-			ls /etc/*-release
+	ls /etc/*-release
       cat /etc/os-release                    OS info stored in a file ending -release in /etc/ folder                          
 
 			who				
@@ -95,17 +95,17 @@
                   #Remember that this will return all users, some of which are system or service users that would not be very useful. 
                   #Another approach could be to grep for “home” as real users will most likely have their folders under the “home” directory.
 			 
-			cat /etc/group
+	cat /etc/group
                   #discover groups on the system
 
-			cat /etc/shadow
+	cat /etc/shadow
                   #discover password hashes - root access required
 
-			ls -lh /var/mail/
+	ls -lh /var/mail/
 									#listing users
 
     	ls -lh /usr/bin/
-	    ls -lh /sbin/
+	ls -lh /sbin/
 									#listing installed applications
 
 			rpm -qa
@@ -159,7 +159,7 @@
       cat /etc/resolv.conf
 									#display DNS servers
       netstat 
-                  #information about existing connections and ports used
+                  #information about existing connections and ports used. Run as SUDO to get all PID and PROGRAM NAMES
                         -a                  all listening/established ports
                         -au                 listening/established UDP ports
                         -at                 listening/established TCP ports
@@ -170,14 +170,14 @@
                         -p                  PID and name
                         -i                  interface statistics
                         -ano                all, do not resolve names, timer information
-				lsof
-								#list of open files
+	lsof
+		#list of open files
 
-				lsof -i
-								#display only Internet and network connections
+	lsof -i
+		#display only Internet and network connections
 
-				lsof -i :[PORT]
-								#display only Internet and network connections on chosen PORT
+	lsof -i :[PORT]
+		#display only Internet and network connections on chosen PORT
 
 >Network log analysis
         awk '/dodgy_domain/ {print $1, $3, $7}' proxy.log                                                find entries containing [dodgy_domain] and print out fields 1,3,7
