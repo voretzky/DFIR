@@ -76,6 +76,9 @@
       
       history
                   #bash history
+
+	lastlog
+			#most recently log in users
                         
       cat /proc/version
                   #The proc filesystem (procfs) provides information about the target system processes. 
