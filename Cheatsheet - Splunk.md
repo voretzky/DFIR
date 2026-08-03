@@ -9,7 +9,7 @@
 
 ---
 
-#### placeholder
+### Placeholder
 
 **Definition:**
 
@@ -24,7 +24,7 @@ sytanx_example
 Use_case_example     
 ```
 
-#### coalesce()
+### coalesce()
 
 **Definition:**
 
@@ -47,6 +47,6 @@ index=web sourcetype=access* OR sourcetype=firewall
 eval status = coalesce(response_code, "unknown")
 ```
 
-#### eval
+### eval
 
-#### stats
+### stats
